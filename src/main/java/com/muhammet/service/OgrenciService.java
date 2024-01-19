@@ -53,4 +53,12 @@ public class OgrenciService {
     public List<Ogrenci> findAllByAdLike(String ad) {
         return ogrenciRepository.findAllByAdLike(ad);
     }
+
+    public List<Ogrenci> findAllByAdStartingWith(String ad) {
+        return ogrenciRepository.findAllByAdStartingWith(ad);
+    }
+
+    public List<Ogrenci> findAllByAdStartingWithAndSoyadStringWith(String ad, String soyad) {
+        return ogrenciRepository.findAllByAdStartingWithAndSoyadStartingWith(ad, soyad);
+    }
 }

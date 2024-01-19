@@ -66,4 +66,15 @@ public class OgrenciController {
     public List<Ogrenci> getAllByAdLike(String ad){
         return ogrenciService.findAllByAdLike("%"+ad+"%");
     }
+
+    @GetMapping("/get-all-by-ad-starting-with")
+    public List<Ogrenci> getAllByAdStringWith(String ad){
+        return ogrenciService.findAllByAdStartingWith(ad);
+    }
+
+    @GetMapping("/get-all-by-ad-soyad-starting")
+    public List<Ogrenci> getAllByAdAndSoyadStaringWith(String ad, String soyad){
+        return ogrenciService.findAllByAdStartingWithAndSoyadStringWith(ad,soyad);
+    }
+
 }
