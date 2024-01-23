@@ -5,7 +5,7 @@
     <title>Öğrenci Ekleme</title>
 </head>
 <body>
-    <form action="http://localhost:8080/ogrenci/save" method="post">
+    <form action="http://localhost:8080/ogrenci/save" method="post" >
         <div>
             <label for="ad">Ad.......:  </label>
             <input type="text" id="ad" name="ad" />
@@ -30,5 +30,20 @@
             <input type="submit" value="Kaydet" />
         </div>
     </form>
+
+    <script>
+       function ekle(){
+            fetch("http://localhost:8080/ogretmen/add",{
+                method: "POST",
+                body: JSON.parse({
+                    "ad": "Muhammet",
+                    "soyad": "TAŞ"
+                })
+            })
+        }
+
+    </script>
+
+
 </body>
 </html>

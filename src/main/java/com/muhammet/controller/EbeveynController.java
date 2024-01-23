@@ -108,4 +108,6 @@ public class EbeveynController {
                 .stream().filter(x-> x.getAdres().contains(adres) && x.getAd().contains(ad))
                 .toList();
     }
+
+
 }
