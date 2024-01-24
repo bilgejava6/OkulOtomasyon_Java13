@@ -2,21 +2,19 @@ package com.muhammet.controller;
 
 import com.muhammet.dto.request.OgretmenSaveRequestDto;
 import com.muhammet.dto.response.OgretmenResponseDto;
-import com.muhammet.entity.Ogrenci;
-import com.muhammet.entity.Ogretmen;
 import com.muhammet.exception.ErrorType;
 import com.muhammet.exception.OkulOtomasyonuException;
 import com.muhammet.service.OgretmenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.muhammet.constants.RestApiUrls.*;
+
 @RestController
-@RequestMapping("/ogretmen")
+@RequestMapping(OGRETMEN)
 @RequiredArgsConstructor
 public class OgretmenController {
     private final OgretmenService ogretmenService;
@@ -38,7 +36,7 @@ public class OgretmenController {
      *  temel amacı işlenmiş veriyi almak ve servise iletmektir. Bu nedenle
      *  burada sadece  tutarlı veriyi iletme işlemi yapıyorsunuz.
      */
-    @PostMapping("/add")
+    @PostMapping(ADD)
     public ResponseEntity<Void> save(@RequestBody OgretmenSaveRequestDto dto){
 //        Ogretmen ogretmen = Ogretmen.builder()
 //                .ad(dto.getAd())
@@ -50,12 +48,12 @@ public class OgretmenController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("get-all")
+    @GetMapping(GET_ALL)
     public ResponseEntity<List<OgretmenResponseDto>> getAll(){
         return ResponseEntity.ok(ogretmenService.findAll());
     }
 
-    @GetMapping("/hata-olustur")
+    @GetMapping(CREATE_ERROR)
     public ResponseEntity<String> hataOlustur(String ad){
         if(ad.equalsIgnoreCase("Muhammet")){
             throw new OkulOtomasyonuException(ErrorType.ERROR_OGRETMEN_EKLEME_HATASI,
