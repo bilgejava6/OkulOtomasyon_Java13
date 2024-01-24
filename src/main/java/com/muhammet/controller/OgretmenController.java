@@ -4,9 +4,12 @@ import com.muhammet.dto.request.OgretmenSaveRequestDto;
 import com.muhammet.dto.response.OgretmenResponseDto;
 import com.muhammet.entity.Ogrenci;
 import com.muhammet.entity.Ogretmen;
+import com.muhammet.exception.ErrorType;
+import com.muhammet.exception.OkulOtomasyonuException;
 import com.muhammet.service.OgretmenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,5 +53,15 @@ public class OgretmenController {
     @GetMapping("get-all")
     public ResponseEntity<List<OgretmenResponseDto>> getAll(){
         return ResponseEntity.ok(ogretmenService.findAll());
+    }
+
+    @GetMapping("/hata-olustur")
+    public ResponseEntity<String> hataOlustur(String ad){
+        if(ad.equalsIgnoreCase("Muhammet")){
+            throw new OkulOtomasyonuException(ErrorType.ERROR_OGRETMEN_EKLEME_HATASI,
+                    "Kullanıcıdan gelen ad parametresi hatalıdır. lütden özel karakter olmadığından emin olun");
+        }else {
+            return ResponseEntity.ok(ad);
+        }
     }
 }
